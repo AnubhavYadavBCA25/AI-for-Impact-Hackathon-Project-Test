@@ -1,7 +1,7 @@
 import streamlit as st
 import google.generativeai as genai
 from features.auth import get_user_details
-from features.system_settings import  safety_settings, generation_config
+from features.system_settings import  safety_settings, generation_config_daily_report, system_instruction_daily_report
 from dotenv import load_dotenv
 import os
 
@@ -9,12 +9,14 @@ load_dotenv()
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 genai.configure(api_key=GOOGLE_API_KEY)
 
-model = genai.GenerativeModel(model_name="gemma-2-27b-it",
+model = genai.GenerativeModel(model_name="gemini-1.5-flash-8b",
                 safety_settings=safety_settings,
-                generation_config=generation_config)
+                generation_config=generation_config_daily_report,
+                system_instruction=system_instruction_daily_report)
 
 # Get user data from session state
 user_data = get_user_details()
+user_name = user_data.get('name', 'User')
 
 if not user_data:
     st.warning("You need to log in to create your daily report.")
@@ -27,11 +29,11 @@ with st.expander("What is Daily Report?"):
 # Create a form for user input
 with st.form("daily_report_form"):
     wake_up_time = st.time_input("When did you wake up?*")
-    day_description = st.text_area("How was your day?*")
+    day_description = st.text_area("How was your day?*", placeholder="Ex: I had a busy day at work. I felt tired and stressed.")
     day_rating = st.slider("Rate your day*", 1, 10)
-    activities = st.text_area("What did you do today?*")
-    problems = st.text_area("Did you face any problems or frustrations?*")
-    feelings = st.text_area("How are you feeling?*")
+    activities = st.text_area("What did you do today?*", placeholder="Ex: I worked on a operation, attended meetings, and went for a walk.")
+    problems = st.text_area("Did you face any problems or frustrations?*", placeholder="Ex: I had a conflict with a colleague and felt overwhelmed.")
+    feelings = st.text_area("How are you feeling?*", placeholder="Ex: I feel tired, stressed, and anxious.")
     st.markdown("*Required**")
     submit_button = st.form_submit_button(label="Submit")
 
@@ -42,9 +44,11 @@ if submit_button:
         st.stop()
     else:
         st.success("Your daily report has been submitted successfully.")
+st.divider()
 
 with st.spinner("Generating summary and advice..."):
-    if wake_up_time and day_description and day_rating and activities and problems and feelings is not None:    
+    if wake_up_time and day_description and day_rating and activities and problems and feelings is not None:
+        st.subheader(f"Hello {user_name}, here is your daily report:")   
         user_name = user_data.get('name', 'User')
         prompt = f"""
         User: {user_name}
@@ -55,9 +59,7 @@ with st.spinner("Generating summary and advice..."):
         Problems: {problems}
         Feelings: {feelings}
         
-        You are DostAI daily report generator. Understand the user's day, feelings, tone, and activities.
-        
-        Please provide a short summary of the user's day, give them greetings, and offer some advice based on their input.
+        Greet the user for sharing their day and provide some advice based on their input.
         """
         response = model.generate_content(prompt)
         st.write(response.text)
