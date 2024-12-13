@@ -14,7 +14,7 @@ model = genai.GenerativeModel('gemini-1.5-pro',
                 system_instruction=system_instruction_symptom_checker,
                 generation_config=generation_config_symptom_checker)
 
-st.info('Note: Dost AI Symptom Checker is a AI based features which is just a Prototype right now. Please use it with caution and consult a doctor for professional advice.')
+st.warning('⚠️Note: Dost AI Symptom Checker is a AI based features which is just a Prototype right now. Please use it with caution and consult a doctor for professional advice.')
 
 st.header('🩺Symptom Checker', anchor='symptom-checker', divider='rainbow')
 with st.expander('What is Symptom Checker?'):

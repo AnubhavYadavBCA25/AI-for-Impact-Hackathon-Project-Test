@@ -14,7 +14,7 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash",
                 system_instruction=system_instruction_daily_plans,
                 generation_config=generation_config_daily_plans)
 
-st.info("Note: Dost AI Daily Plans is a AI based features which is just a Prototype right now. Please use it with caution and change the generated plans as per your needs.")
+st.warning("⚠️Note: Dost AI Daily Plans is a AI based features which is just a Prototype right now. Please use it with caution and change the generated plans as per your needs.")
 
 st.header("📅Daily Plans Maker", anchor="daily-plans", divider="rainbow")
 with st.expander("What is Daily Plans Maker?"):
@@ -24,14 +24,15 @@ st.divider()
 st.subheader("Enter your details to create your daily plans:")
 with st.form(key="daily-plans-form"):
     schedule_type = st.selectbox("What is your schedule for today?*", ["Holiday", "Workday", "Weekend"])
-    time = st.time_input("When do you want to start your day?*", datetime.time(8, 0))
+    shift_start_time = st.time_input("When your shift starts (on Workdays)?*", datetime.time(9, 0))
+    shift_end_time = st.time_input("When your shift ends (on Workdays)?*", datetime.time(17, 0))
     plan_type = st.multiselect("What type of plans would you like to create?*", ["Health Exercise", "Diet Plan", "Trip Plan"])
     any_other = st.text_area("Any other preferences or details you would like to add or Preplanned work?*", height=100, placeholder="Example: I want to go for a walk in the evening.")
     st.markdown("*Required**")
     submit_button = st.form_submit_button(label="Create Plans")
 
     if submit_button:
-        if not schedule_type or not time or not plan_type or not any_other:
+        if not schedule_type or not shift_start_time or not shift_end_time or not plan_type or not any_other:
             st.error("Please fill all the required fields.")
             st.stop()
         else:
@@ -39,9 +40,9 @@ with st.form(key="daily-plans-form"):
 st.divider()
 
 with st.spinner("Processing your request..."):
-    if schedule_type and time and plan_type and any_other is not None:
+    if schedule_type and shift_start_time and shift_end_time and plan_type and any_other is not None:
         st.subheader("Daily Plans:")
-        prompt = f"""Today is {schedule_type} and I want to start my day at {time}. I would like to create a plan for {', '.join(plan_type)} and {any_other}."""
+        prompt = f"""Today is {schedule_type} (if schedule type is Holiday or Weekend, then ignore shift start and end) and my shift is from {shift_start_time} to {shift_end_time}. I would like to create a plan for {plan_type} and {any_other}."""
         response = model.generate_content(prompt)
         st.write(response.text)
     else:

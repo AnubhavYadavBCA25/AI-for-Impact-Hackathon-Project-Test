@@ -67,6 +67,8 @@ def show_register_form():
         status = st.selectbox("Marital Status", ["Single", "Married", "Divorced", "Widowed", "Separated"])
         prob_facing = st.selectbox("Problems Facing", ["Mental Health", "Physical Health", "Both", "None"])
         prob_reason = st.selectbox("Reason for Problems", ["Professional", "Personal", "Both", "Other"])
+        chatbot_nickname = st.text_input("Enter Chatbot Nickname", placeholder="Ex: DostAI, HealthBot or Your Friend Name")
+        vegan_or_nonvegan = st.selectbox("Vegan or Non-Vegan", ["Vegan", "Non-Vegan"])
 
         if st.button("Submit Registration"):
             if new_username and new_password and new_email:
@@ -90,7 +92,9 @@ def show_register_form():
                     'working_hours': working_hours,
                     'status': status,
                     'prob_facing': prob_facing,
-                    'prob_reason': prob_reason
+                    'prob_reason': prob_reason,
+                    'chatbot_nickname': chatbot_nickname,
+                    'vegan_or_nonvegan': vegan_or_nonvegan
                 }
             
                 # Save the updated credentials to the config.yaml file
