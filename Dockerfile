@@ -8,7 +8,7 @@ WORKDIR /app
 # COPY requirements.txt requirements.txt
 
 # Step 4: Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Step 5: Copy the Streamlit app code to the container
 COPY . ./
