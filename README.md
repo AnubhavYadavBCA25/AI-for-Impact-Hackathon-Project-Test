@@ -31,6 +31,10 @@
    - User-friendly dashboard for managing tasks, patient records, and reports.  
    - Profile section to track personal achievements, goals, and activities.  
 
+### 7. **Contact Us**
+   - Allows users to send feedback and queries directly to the support team.
+   - Provides a form for users to input their name, email, subject, message.
+
 ---
 
 ## 🤖 Use Cases  
@@ -72,6 +76,7 @@
 3. **Symptoms Checker**: Medical knowledge base integrated with AI for symptom analysis.  
 4. **Daily Reports & Exercise Plan**: Backend automation to generate daily insights and personalized plans.  
 5. **Dashboard/Profile**: Interactive dashboard for seamless user experience.  
+6. **Contact Us:**: Form-based interface for users to send feedback and queries to the support team.
 
 ---
 

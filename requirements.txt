@@ -5,3 +5,5 @@ python-dotenv
 streamlit-authenticator
 setuptools
 streamlit-lottie
+google-cloud-aiplatform
+google-cloud-logging
