@@ -10,12 +10,13 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 genai.configure(api_key=GEMINI_API_KEY)
 
-model = genai.GenerativeModel('gemini-1.5-flash',
+model = genai.GenerativeModel('gemini-1.5-flash-8b',
                 safety_settings=safety_settings,
                 system_instruction=system_instruction,
                 generation_config=generation_config
         )
 
+st.warning("⚠️Note: This is a demo version of DostAI ChatBot. ChatBot is just a Prototype and not a final product. It may not be able to answer all your questions.")
 st.header('🤖Chat with DostAI', divider='rainbow')
 
 # Initialize chat session in Streamlit if not already present

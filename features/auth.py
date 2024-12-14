@@ -58,7 +58,10 @@ def show_register_form():
         new_name = st.text_input("Enter Your Full Name")
         new_password = st.text_input("Enter Password", type="password")
         new_email = st.text_input("Enter your email")
-        preferred_lang = st.selectbox("Preferred Language", ["English", "Spanish", "French", "German", "Italian", "Portuguese", "Russian", "Chinese", "Japanese", "Korean"])
+        preferred_lang = st.selectbox("Preferred Language",  ["English","Japanese","Korean","Arabic","Bahasa Indonesia","Bengali","Bulgarian","Chinese (Simplified)","Chinese (Traditional)",
+                                                            "Croatian","Czech","Danish","Dutch","Estonian","Farsi","Finnish","French","German","Gujarati","Greek","Hebrew","Hindi","Hungarian","Italian","Kannada","Latvian",
+                                                            "Lithuanian","Malayalam","Marathi","Norwegian","Polish","Portuguese","Romanian","Russian","Serbian","Slovak","Slovenian","Spanish","Swahili","Swedish","Tamil",
+                                                            "Telugu","Thai","Turkish","Ukrainian","Urdu","Vietnamese"])
         gender = st.selectbox("Enter Your Gender", ["Male", "Female"])
         age = st.number_input("Enter Your Age", min_value=18, max_value=100)
         designation = st.selectbox("Designation", ["Doctor", "Nurse", "Healthcare Worker", "Assistant Doctor", "Chemist", "Pharmacist", "Other Healthcare Professional"])

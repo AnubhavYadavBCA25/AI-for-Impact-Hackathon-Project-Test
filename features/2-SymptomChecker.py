@@ -18,7 +18,7 @@ st.warning('⚠️Note: Dost AI Symptom Checker is a AI based features which is 
 
 st.header('🩺Symptom Checker', anchor='symptom-checker', divider='rainbow')
 with st.expander('What is Symptom Checker?'):
-    st.write('Symptom Checker is a tool that uses Google Artificial Intelligence Model to help you identify possible health conditions based on your symptoms. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a doctor for professional advice.')
+    st.write('Symptom Checker is a tool that uses Google Artificial Intelligence Model to help you identify possible health conditions based on your symptoms. This can help healthcare workers to diagnose their patients and themselves for early treatment and care. Please note that this tool is not a substitute for professional medical advice and should be used for informational purposes only.')
 st.divider()
 
 st.subheader('Enter your details to check your symptoms:')
