@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Step 5: Copy the rest of the application code to the container
 COPY . /app/
+COPY .streamlit/secrets.toml ./.streamlit/secrets.toml
 
 # Step 6: Expose the port on which Streamlit runs (default: 8501)
 EXPOSE 8501
