@@ -4,12 +4,6 @@ from features.auth import get_user_details
 from features.system_settings import  safety_settings, generation_config_daily_report, system_instruction_daily_report
 from dotenv import load_dotenv
 import os
-import pandas as pd
-from streamlit_gsheets import GSheetsConnection
-
-# Connecting to Google Sheets
-conn = st.connection("gsheets", type=GSheetsConnection)
-daily_report_sheet = conn.read(worksheet="Daily Report Data", ttl=60)
 
 load_dotenv()
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
@@ -50,20 +44,6 @@ if submit_button:
         st.error("Please fill out all the required fields.")
         st.stop()
     else:
-        # Save the daily report data to Google Sheets
-        daily_report_data = pd.DataFrame({
-            "Name": user_name,
-            "How long sleep": how_long_sleep,
-            "Day description": day_description,
-            "Day Quality": day_quality,
-            "Day rating": day_rating,
-            "Problems": problems,
-            "Gratitude Exercise": gratitude_exer,
-            "Feelings": feelings,
-        }, index=[0])
-
-        updated_daily_report_sheet = pd.concat([daily_report_sheet, daily_report_data], ignore_index=True)
-        conn.update(worksheet="Daily Report Data", data=updated_daily_report_sheet)
         st.success("Your daily report has been submitted successfully.")
 st.divider()
 
